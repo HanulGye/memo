@@ -1,0 +1,54 @@
+tilesタグライブラリ使用方法
+
+１．struts-config.xmlファイルでの設定
+	
+	- plug-inタグの設定
+
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config"
+                       			value="/WEB-INF/tiles-defs.xml" />
+      		<set-property property="definitions-debug" value="2" />
+      		<set-property property="definitions-parser-details" value="2" />
+     	 	<set-property property="definitions-parser-validate" value="true" />
+	</plug-in>
+	
+	->set-propertyタグでタイルズの定義ファイルの経路やデバッグなどを設定する
+
+2. tiles-defs.xmlファイルの設定
+
+	- 上記のタグで定義ファイルの経路を設定したら、後は実際どのようなタイルを使うかを
+	　定義するファイルを作成する段階だ。
+
+	- <definition>タグを使い、
+		
+		name属性には任意の定義名を書く。
+		
+		path属性にはこの定義の内容をどのｊｓｐ(ビューページ)で適用するか経路を作成
+	
+	- <put>タグを使い、
+		
+		name属性には上に指定したjspで各タイルを呼び出すときどのような名前で呼ぶのかを記載
+		
+		value属性には実際タイルに該当する内容
+					(eg. ヘッダ、フッタならｊｓｐやhtmlなどのファイル経路)
+					(eg. ページのタイトルなどの場合、内容に該当するテキスト自体)
+
+3. layout(タイルで構成される枠だと思え)及び各タイルの生成
+
+	- layout中に入る実際のヘッダやフッタ及びボディのjspを生成する
+
+		部品を作ることだと思え。
+
+	
+	- layoutとしてのjspファイルを生成する
+	
+		タイルタグライブラリを使うため、中に<%@ taglib uri="経路" prefix="tiles(あだ名)"%>を作成
+
+		先に作った部品を使うには<tiles:insert>又は<tiles:getAsString>タグが必要だ。
+
+
+4. struts-config.xmlの作成
+
+	- actionタグを作成して、作ったタイルに移動する
+	
+		<action path="アクションのURL(～.do)" forward="definitionタグで指定したname属性名と同様だ。">	
