@@ -1,0 +1,62 @@
+
+validationの作成
+
+<form name="GRSPC0006Form">
+    		<field
+    			property="network_id"
+    			depends="required,maxlength,mask">
+				<arg0 key="GRSPC0006Form.network_id" />
+				<arg1 key="${var:maxlength}" resource="false"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+				<arg2 key="GRSPC0006Form.network_id"/>
+				<var>
+				<var-name>mask</var-name>
+				<var-value>^[a-zA-Z0-9]*$</var-value>
+				</var>
+    		</field>
+</form>
+
+
+上記の例をみながら説明を書く
+
+formタグー>ここで指定したアクションフォームで検証が行う
+
+fieldタグには指定したフォームのなかでどのメンバ変数を検証するかを指定する
+	property属性はその指定の変数名
+	depends属性には予め用意されている検証(バリデーション)の種類を指定
+
+argN(Nは数字)タグにはバリデーションによるエラーメッセージが変更される内容を作成する
+
+msgタグは用意されているバリデーションのmsg（message）部分を変更するときに使用
+ー>例えば、同じmaskバリデーションを使うけど、表示されてるメッセージは変更する場合
+　　msgタグを使って<msg name="mask" key="変更するメッセージそのものやあれが入れているpropertiesファイルのkey名"/>
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+++バリデータの使用するときのstruts-config.xmlの設定について
+
+<action
+	path="/insert">
+	<forward name="test" path="/pages/test.jsp"/>
+</action>
+<action
+	path="/insertProcess"
+	type="jp.co.grspc.action.GRSPC0006RegistAction"
+	name="GRSPC0006Form"
+	scope="request"
+	validate="true"
+	input="/insert.do">
+			<forward name="completeInsert" path="/pages/GRSPC0003.jsp" />
+</action>
+->アクションタグのなかで上記のようにinputという属性がある、このタグはバリデーションが行った後でどのページへ移動するかを
+指定する属性だ。この属性に直接プロジェクトの経路を入力するのも可能だが
+もし、他のアクションを通じてページを見せる場合はアクションのパスを入力することで実現できる。
+ただし、このときはパス名のなかに.do(web.xmlで指定したURLの語尾）も含めて記入すること(要すると完全記入っていうこと)
+
+
+
