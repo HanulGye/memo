@@ -1,0 +1,60 @@
+staticメソッドの使用
+
+	→メモリの効率を高めるためにstatic宣言をする。
+	なぜ、メモリの効率が増加されるか？
+	staticメソッドはインスタンスの生成がなくても使えるから。
+
+ロギングフレームワークとは？
+
+	→簡単に言うとあるプログラムのログを出力するときに
+	もっと楽に処理するために使うツール。代表的に「log4j」がある。
+
+==================================================================
+log4ｊの設定手順と使用方法
+
+１．log4jのjarファイルをプロジェクトのライブラリへ追加
+	
+	→エクリプスでビルドパスを設定すること。
+
+２．log4jの設定ファイルを作成
+
+	→「.properties」と「.xml」、この二つの拡張子ファイルを選んで作成する。
+
+下記はxmlのファイル形式で作成した設定となる。
+
+=============================設定の例==========================
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true"
+  xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+  <!-- Console -->
+  <appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern"
+               value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+    </layout>
+  </appender>
+
+  <root>
+    <level value="INFO"/>
+    <appender-ref ref="console"/>
+  </root>
+</log4j:configuration>
+
+==================================================================
+
+設定する内容の説明
+
+<appender> 
+: Loggerから渡されたログをどのような形式でするかを設定するプロパティ
+（eg. ファイル、コンソール、データベースのテーブルなど）
+
+<layout>
+: 名称、その通りに出力する内容の構成を設定するプロパティ
+　内容も指定できるが改行文字とかもつけて表す内容によって行を変更したりすることもできる
+
+<root>
+: 後で書くこと
