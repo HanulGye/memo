@@ -1,0 +1,33 @@
+--値がNULLの場合、指定する値に変換する関数NVLとCOALESCE
+
+--Oracle SQL 
+select s.ename syain, nvl(j.ename, '上司なし') jyosi
+from emp s
+left outer join emp j
+on s.mgr = j.empno
+order by s.empno;
+
+--ANSI SQL 意味はどのDBMSでも使用できる標準SQL。
+--別名を指定する場合、関数式が優先(関数の結果で出た値の集合(カラム)に新たな名前をつける)
+select s.ename syain, coalesce(j.ename, '上司なし') jyosi
+from emp s
+left outer join emp j
+on s.mgr = j.empno
+order by s.empno;
+
+
+
+select * FROM t_employee
+having avg(year) > 2000
+group by e_name, e_num, gender, office, year;
+
+
+===========================================================================================================
+
+where rownum between 21 and 30
+
+where rownum >= 21 and rownum <= 30
+
+二つのクエリは等しい、でもbetweenを活用してより簡潔に作成できる。
+
+===========================================================================================================
