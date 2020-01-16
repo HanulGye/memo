@@ -1,0 +1,27 @@
+MERGE INTO tableA A 
+USING
+	(SELECT '?' as column1,
+		'?' as columnN,
+	from DUAL) D 
+on(A.column1=D.column1 
+	AND A.column2=D.column2)  
+WHEN MATCHED THEN
+UPDATE SET A.column3=D.column3,
+           A.column4=to_date(D.column4,'YYYY/MM/DD hh24:mi:ss'),
+           A.columnN=D.columnN  
+WHEN NOT MATCHED THEN
+INSERT (A.column1,
+	A.column2,
+	A.column3,
+	A.column4,
+	A.columnN) 
+	VALUES (D.column1,
+		D.column2,
+		D.column3,
+		to_date(D.column4,'YYYY/MM/DD hh24:mi:ss'),
+		D.columnN)
+
+
+*ONの条件に使用したカラムは更新(UPDATE)できないので注意すること。
+**Oracle 10gバージョン以上だとDELETE処理もできる。
+***カッコとかは上記の通り作成すること。
