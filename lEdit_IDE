@@ -1,0 +1,8 @@
+에디터(경량 에디터)와 IDE의 차이
+
+에디터라는 범주내에 경량에디터와 IDE가 존재
+IDE는 개발 조건에 맞춰 기능을 추가한 것(경량에디터에 여러 플러그인을 추가한 것처럼)
+
+
+참고 
+https://ko.javascript.info/code-editors#:~:text=%EA%B2%BD%EB%9F%89%20%EC%97%90%EB%94%94%ED%84%B0%EB%8A%94%20%ED%8C%8C%EC%9D%BC%EC%9D%84,%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94%20%EC%9D%BC%20%EB%93%B1%EB%8F%84%20%ED%95%A9%EB%8B%88%EB%8B%A4.
